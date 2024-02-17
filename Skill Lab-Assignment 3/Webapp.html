@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Web Application</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        nav {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: space-between;
+        }
+        nav ul li {
+            padding: 5px 10px;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+        .product {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .product img {
+            width: 100px;
+            margin-right: 20px;
+        }
+        .product button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .product button:hover {
+            background-color: #45a049;
+        }
+        #cart {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Products</a></li>
+        <li>
+            <form action="#" method="get">
+                <input type="text" name="search" placeholder="Search...">
+                <button type="submit">Search</button>
+            </form>
+        </li>
+    </ul>
+</nav>
+
+<div class="container">
+    <h1>Shopping Web Application</h1>
+    <div class="product">
+        <img src="https://th.bing.com/th?id=OIP.uVGIfdOTsAEHHdpWzgSMRAHaJx&w=217&h=287&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=3.1&rm=2" alt="Watch">
+        <div>
+            <h3>Classic Watch</h3>
+            <p>Description: A stylish and comfortable shirt.</p>
+            <p>$25.00</p>
+            <button onclick="addToCart('Classic Watch', 25)">Add to Cart</button>
+        </div>
+    </div>
+    <div class="product">
+        <img src="https://cdn.shopify.com/s/files/1/0486/0634/7416/products/CollaredPleatedFitandFlareDress-Olive_M1_1200x.jpg?v=1618479660" alt="Formal Dress">
+        <div>
+            <h3>Formal Dress</h3>
+            <p>Description: High-quality headphones for music lovers.</p>
+            <p>$50.00</p>
+            <button onclick="addToCart('Formal Dress', 50)">Add to Cart</button>
+        </div>
+    </div>
+    <div class="product">
+        <img src="https://th.bing.com/th?id=OIP.LU50V6o6LYCK72McMLj--AAAAA&w=250&h=250&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=3.1&rm=2" alt="Headphones">
+        <div>
+            <h3>Headphones</h3>
+            <p>Description: A sporty cap for outdoor activities.</p>
+            <p>$15.00</p>
+            <button onclick="addToCart('Headphones', 15)">Add to Cart</button>
+        </div>
+    </div>
+    <div id="cart">
+        <h2>Shopping Cart</h2>
+        <ul id="cart-items"></ul>
+        <p>Total: $<span id="cart-total">0.00</span></p>
+    </div>
+</div>
+
+<script>
+    let cartItems = [];
+    let cartTotal = 0;
+
+    function addToCart(productName, price) {
+        cartItems.push({ name: productName, price: price });
+        cartTotal += price;
+        updateCart();
+    }
+
+    function updateCart() {
+        const cartItemsElement = document.getElementById('cart-items');
+        const cartTotalElement = document.getElementById('cart-total');
+
+        cartItemsElement.innerHTML = '';
+        cartItems.forEach(item => {
+            const li = document.createElement('li');
+            li.textContent = `${item.name} - $${item.price}`;
+            cartItemsElement.appendChild(li);
+        });
+
+        cartTotalElement.textContent = cartTotal.toFixed(2);
+    }
+</script>
+
+</body>
+</html>
